@@ -11,6 +11,7 @@ import (
 	runewidth "github.com/mattn/go-runewidth"
 )
 
+// Number constants
 const (
 	MinUnsignedInteger uint = 0
 	MaxUnsignedInteger      = ^MinUnsignedInteger
@@ -62,9 +63,8 @@ func warn(msg string) {
 func pathExists(path string) bool {
 	if _, err := os.Stat(path); os.IsNotExist(err) {
 		return false
-	} else {
-		return true
 	}
+	return true
 }
 
 func getValidCwd() string {
@@ -104,7 +104,7 @@ var modules = map[string](func(*powerline)){
 	"perms":     segmentPerms,
 	"root":      segmentRoot,
 	"shell-var": segmentShellVar,
-	"ssh":       segmentSsh,
+	"ssh":       segmentSSH,
 	"termtitle": segmentTermTitle,
 	"time":      segmentTime,
 	"user":      segmentUser,

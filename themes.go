@@ -1,5 +1,6 @@
 package main
 
+// Symbols that can be configured
 type Symbols struct {
 	Lock          string
 	Network       string
@@ -19,6 +20,7 @@ type Symbols struct {
 	RepoStashed    string
 }
 
+// Theme that can be configured
 type Theme struct {
 	Reset          uint8
 	UsernameFg     uint8
@@ -43,8 +45,8 @@ type Theme struct {
 	ReadonlyFg uint8
 	ReadonlyBg uint8
 
-	SshFg uint8
-	SshBg uint8
+	SSHFg uint8
+	SSHBg uint8
 
 	DockerMachineFg uint8
 	DockerMachineBg uint8

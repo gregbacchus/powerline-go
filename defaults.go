@@ -97,8 +97,8 @@ var themes = map[string]Theme{
 		ReadonlyFg: 254,
 		ReadonlyBg: 124,
 
-		SshFg: 254,
-		SshBg: 166, // medium orange
+		SSHFg: 254,
+		SSHBg: 166, // medium orange
 
 		DockerMachineFg: 177, // light purple
 		DockerMachineBg: 55,  // purple
@@ -440,8 +440,8 @@ var themes = map[string]Theme{
 		ReadonlyFg: 124,
 		ReadonlyBg: 253,
 
-		SshFg: 166, // medium orange
-		SshBg: 254,
+		SSHFg: 166, // medium orange
+		SSHBg: 254,
 
 		DockerMachineFg: 55,  // purple
 		DockerMachineBg: 177, // light purple

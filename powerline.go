@@ -5,13 +5,15 @@ import (
 	"fmt"
 	"strings"
 
+	"os"
+	"strconv"
+
 	"github.com/mattn/go-runewidth"
 	"golang.org/x/crypto/ssh/terminal"
 	"golang.org/x/text/width"
-	"os"
-	"strconv"
 )
 
+// ShellInfo holds data to abstract different shells
 type ShellInfo struct {
 	rootIndicator    string
 	colorTemplate    string
@@ -33,6 +35,7 @@ type powerline struct {
 	Segments        []segment
 }
 
+// NewPowerline constructs a new powerline
 func NewPowerline(args args, cwd string, priorities map[string]int) *powerline {
 	p := new(powerline)
 	p.args = args
@@ -64,9 +67,8 @@ func NewPowerline(args args, cwd string, priorities map[string]int) *powerline {
 func (p *powerline) color(prefix string, code uint8) string {
 	if code == p.theme.Reset {
 		return p.reset
-	} else {
-		return fmt.Sprintf(p.shellInfo.colorTemplate, fmt.Sprintf("[%s;5;%dm", prefix, code))
 	}
+	return fmt.Sprintf(p.shellInfo.colorTemplate, fmt.Sprintf("[%s;5;%dm", prefix, code))
 }
 
 func (p *powerline) fgColor(code uint8) string {
@@ -121,30 +123,30 @@ func (p *powerline) draw() string {
 		}
 		if shellActualLength > shellMaxLength && *p.args.TruncateSegmentWidth > 0 {
 			minPriorityNotTruncated := MaxInteger
-			minPriorityNotTruncatedSegmentId := -1
+			minPriorityNotTruncatedSegmentID := -1
 			for idx, segment := range p.Segments {
 				if segment.width > *p.args.TruncateSegmentWidth && segment.priority < minPriorityNotTruncated {
 					minPriorityNotTruncated = segment.priority
-					minPriorityNotTruncatedSegmentId = idx
+					minPriorityNotTruncatedSegmentID = idx
 				}
 			}
-			for minPriorityNotTruncatedSegmentId != -1 && shellActualLength > shellMaxLength {
-				segment := p.Segments[minPriorityNotTruncatedSegmentId]
+			for minPriorityNotTruncatedSegmentID != -1 && shellActualLength > shellMaxLength {
+				segment := p.Segments[minPriorityNotTruncatedSegmentID]
 
 				shellActualLength -= segment.width
 
 				segment.content = runewidth.Truncate(segment.content, *p.args.TruncateSegmentWidth-runewidth.StringWidth(segment.separator)-3, "…")
 				segment.width = segment.computeWidth()
 
-				p.Segments = append(append(p.Segments[:minPriorityNotTruncatedSegmentId], segment), p.Segments[minPriorityNotTruncatedSegmentId+1:]...)
+				p.Segments = append(append(p.Segments[:minPriorityNotTruncatedSegmentID], segment), p.Segments[minPriorityNotTruncatedSegmentID+1:]...)
 				shellActualLength += segment.width
 
 				minPriorityNotTruncated = MaxInteger
-				minPriorityNotTruncatedSegmentId = -1
+				minPriorityNotTruncatedSegmentID = -1
 				for idx, segment := range p.Segments {
 					if segment.width > *p.args.TruncateSegmentWidth && segment.priority < minPriorityNotTruncated {
 						minPriorityNotTruncated = segment.priority
-						minPriorityNotTruncatedSegmentId = idx
+						minPriorityNotTruncatedSegmentID = idx
 					}
 				}
 			}
@@ -152,16 +154,16 @@ func (p *powerline) draw() string {
 
 		for shellActualLength > shellMaxLength {
 			minPriority := MaxInteger
-			minPrioritySegmentId := -1
+			minPrioritySegmentID := -1
 			for idx, segment := range p.Segments {
 				if segment.priority < minPriority {
 					minPriority = segment.priority
-					minPrioritySegmentId = idx
+					minPrioritySegmentID = idx
 				}
 			}
-			if minPrioritySegmentId != -1 {
-				segment := p.Segments[minPrioritySegmentId]
-				p.Segments = append(p.Segments[:minPrioritySegmentId], p.Segments[minPrioritySegmentId+1:]...)
+			if minPrioritySegmentID != -1 {
+				segment := p.Segments[minPrioritySegmentID]
+				p.Segments = append(p.Segments[:minPrioritySegmentID], p.Segments[minPrioritySegmentID+1:]...)
 				shellActualLength -= segment.width
 			}
 		}
@@ -169,9 +171,9 @@ func (p *powerline) draw() string {
 
 	var buffer bytes.Buffer
 	for idx, segment := range p.Segments {
-		if (segment.hideSeparators) {
-			buffer.WriteString(segment.content);
-			continue;
+		if segment.hideSeparators {
+			buffer.WriteString(segment.content)
+			continue
 		}
 
 		var separatorBackground string
