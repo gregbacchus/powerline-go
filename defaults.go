@@ -33,7 +33,7 @@ var symbolTemplates = map[string]Symbols{
 		RepoBehind:     "\uf0ab",
 		RepoStaged:     "\uf00c",
 		RepoNotStaged:  "\uf040",
-		RepoUntracked:  "\uf055",
+		RepoUntracked:  "\uf067",
 		RepoConflicted: "\uf421",
 		RepoStashed:    "\uf0c7",
 	},
