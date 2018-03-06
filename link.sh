@@ -1,0 +1,1 @@
+sudo ln -snf $HOME/go/bin/powerline-go /usr/local/bin/powerline-go
