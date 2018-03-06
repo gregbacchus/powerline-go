@@ -18,8 +18,11 @@ func segmentUser(p *powerline) {
 	var background uint8
 	if os.Getuid() == 0 {
 		background = p.theme.UsernameRootBg
+		userPrompt = p.symbolTemplates.RootUser
 	} else {
 		background = p.theme.UsernameBg
+		// r, _ := regexp.Compile("([\\w.-_]+\\\\)?(.+)(@[\\w.-_]+)?")
+		// userPrompt = r.FindAllStringSubmatch(userPrompt, -1)[0][2]
 	}
 
 	p.appendSegment("user", segment{

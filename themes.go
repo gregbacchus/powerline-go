@@ -6,6 +6,9 @@ type Symbols struct {
 	Separator     string
 	SeparatorThin string
 
+	RootUser string
+	PathHome string
+
 	RepoDetached   string
 	RepoAhead      string
 	RepoBehind     string

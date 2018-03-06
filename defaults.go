@@ -7,20 +7,8 @@ var symbolTemplates = map[string]Symbols{
 		Separator:     "\u25B6",
 		SeparatorThin: "\u276F",
 
-		RepoDetached:   "\u2693",
-		RepoAhead:      "\u2B06",
-		RepoBehind:     "\u2B07",
-		RepoStaged:     "\u2714",
-		RepoNotStaged:  "\u270E",
-		RepoUntracked:  "+",
-		RepoConflicted: "\u273C",
-		RepoStashed:    "\u2691",
-	},
-	"patched": {
-		Lock:          "\uE0A2",
-		Network:       "\uE0A2",
-		Separator:     "\uE0B0",
-		SeparatorThin: "\uE0B1",
+		RootUser: "root",
+		PathHome: "~",
 
 		RepoDetached:   "\u2693",
 		RepoAhead:      "\u2B06",
@@ -31,7 +19,27 @@ var symbolTemplates = map[string]Symbols{
 		RepoConflicted: "\u273C",
 		RepoStashed:    "\u2691",
 	},
+	"patched": {
+		Lock:          "\uf023",
+		Network:       "\uf473",
+		Separator:     "\uE0B0",
+		SeparatorThin: "\uE0B1",
+
+		RootUser: "\uf2bd",
+		PathHome: "\uf015",
+
+		RepoDetached:   "\uf127",
+		RepoAhead:      "\uf0aa",
+		RepoBehind:     "\uf0ab",
+		RepoStaged:     "\uf00c",
+		RepoNotStaged:  "\uf040",
+		RepoUntracked:  "\uf055",
+		RepoConflicted: "\uf421",
+		RepoStashed:    "\uf0c7",
+	},
 	"flat": {
+		RootUser:       "root",
+		PathHome:       "~",
 		RepoDetached:   "\u2693",
 		RepoAhead:      "\u2B06",
 		RepoBehind:     "\u2B07",
@@ -147,7 +155,7 @@ var themes = map[string]Theme{
 		PerlbrewBg: 20, // a mid-tone blue
 
 		TimeFg: 15,
-		TimeBg: 236,
+		TimeBg: 0,
 
 		ShellVarFg: 52,
 		ShellVarBg: 11,

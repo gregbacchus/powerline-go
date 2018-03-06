@@ -90,7 +90,7 @@ func cwdToPathSegments(p *powerline, cwd string) []pathSegment {
 	home, _ := os.LookupEnv("HOME")
 	if strings.HasPrefix(cwd, home) {
 		pathSegments = append(pathSegments, pathSegment{
-			path: "~",
+			path: p.symbolTemplates.PathHome,
 			home: true,
 		})
 		cwd = cwd[len(home):]

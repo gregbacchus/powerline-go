@@ -226,7 +226,9 @@ func (p *powerline) draw() string {
 
 		nextLineBuffer.WriteString(p.fgColor(foreground))
 		nextLineBuffer.WriteString(p.bgColor(background))
+		nextLineBuffer.WriteRune(' ')
 		nextLineBuffer.WriteString(p.shellInfo.rootIndicator)
+		nextLineBuffer.WriteRune(' ')
 		nextLineBuffer.WriteString(p.reset)
 		nextLineBuffer.WriteString(p.fgColor(background))
 		nextLineBuffer.WriteString(p.symbolTemplates.Separator)
